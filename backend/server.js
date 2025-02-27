@@ -12,15 +12,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Check if MONGO_URI is correctly loaded
 if (!process.env.MONGO_URI) {
   console.error("❌ MONGO_URI is missing in .env file");
   process.exit(1); // Stop the server if the database URL is missing
 }
 
-// Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => {
     console.error("❌ MongoDB Connection Error:", err);
